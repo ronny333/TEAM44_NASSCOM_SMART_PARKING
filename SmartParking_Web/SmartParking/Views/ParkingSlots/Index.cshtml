@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SmartParking.Models.ParkingSlot>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParkingSlotAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlotNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner.OwnerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParkingSlotAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlotNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.OwnerName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ParkingSlotID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ParkingSlotID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ParkingSlotID })
+        </td>
+    </tr>
+}
+
+</table>

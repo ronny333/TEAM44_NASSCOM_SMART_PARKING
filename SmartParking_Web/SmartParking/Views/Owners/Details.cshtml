@@ -1,0 +1,42 @@
+﻿@model SmartParking.Models.Owner
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Owner</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerContactNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerContactNum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

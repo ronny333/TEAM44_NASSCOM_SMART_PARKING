@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SmartParkingModelStoreContainer" CdmEntityContainer="SmartParkingEntities1">
+    <EntitySetMapping Name="BoardParkInfoes">
+      <EntityTypeMapping TypeName="SmartParkingModel.BoardParkInfo">
+        <MappingFragment StoreEntitySet="BoardParkInfo">
+          <ScalarProperty Name="BoardParkInfoID" ColumnName="BoardParkInfoID" />
+          <ScalarProperty Name="ParkingSlotID" ColumnName="ParkingSlotID" />
+          <ScalarProperty Name="pin" ColumnName="pin" />
+          <ScalarProperty Name="gpio" ColumnName="gpio" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Owners">
+      <EntityTypeMapping TypeName="SmartParkingModel.Owner">
+        <MappingFragment StoreEntitySet="Owner">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="OwnerAddress" ColumnName="OwnerAddress" />
+          <ScalarProperty Name="OwnerContactNum" ColumnName="OwnerContactNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParkingSlots">
+      <EntityTypeMapping TypeName="SmartParkingModel.ParkingSlot">
+        <MappingFragment StoreEntitySet="ParkingSlot">
+          <ScalarProperty Name="ParkingSlotID" ColumnName="ParkingSlotID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="ParkingSlotAddress" ColumnName="ParkingSlotAddress" />
+          <ScalarProperty Name="SlotNumber" ColumnName="SlotNumber" />
+          <ScalarProperty Name="AvailableStartDate" ColumnName="AvailableStartDate" />
+          <ScalarProperty Name="AvailableEndDate" ColumnName="AvailableEndDate" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

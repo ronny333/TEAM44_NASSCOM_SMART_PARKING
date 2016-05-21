@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmartParkingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BoardParkInfo">
+          <Key>
+            <PropertyRef Name="BoardParkInfoID" />
+          </Key>
+          <Property Name="BoardParkInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkingSlotID" Type="int" />
+          <Property Name="pin" Type="nvarchar" MaxLength="10" />
+          <Property Name="gpio" Type="nvarchar" MaxLength="10" />
+          <Property Name="value" Type="nvarchar" MaxLength="10" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="20" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerName" Type="nvarchar(max)" />
+          <Property Name="OwnerAddress" Type="nvarchar(max)" />
+          <Property Name="OwnerContactNum" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="ParkingSlot">
+          <Key>
+            <PropertyRef Name="ParkingSlotID" />
+          </Key>
+          <Property Name="ParkingSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="ParkingSlotAddress" Type="nvarchar(max)" />
+          <Property Name="SlotNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvailableStartDate" Type="date" />
+          <Property Name="AvailableEndDate" Type="date" />
+          <Property Name="value" Type="bit" />
+          <Property Name="Latitude" Type="nvarchar(max)" />
+          <Property Name="Longitude" Type="nvarchar(max)" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK_BoardParkInfo_ParkingSlot">
+          <End Role="ParkingSlot" Type="Self.ParkingSlot" Multiplicity="0..1" />
+          <End Role="BoardParkInfo" Type="Self.BoardParkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlot">
+              <PropertyRef Name="ParkingSlotID" />
+            </Principal>
+            <Dependent Role="BoardParkInfo">
+              <PropertyRef Name="ParkingSlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParkingSlot_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+          <End Role="ParkingSlot" Type="Self.ParkingSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="OwnerID" />
+            </Principal>
+            <Dependent Role="ParkingSlot">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartParkingModelStoreContainer">
+          <EntitySet Name="BoardParkInfo" EntityType="Self.BoardParkInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParkingSlot" EntityType="Self.ParkingSlot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BoardParkInfo_ParkingSlot" Association="Self.FK_BoardParkInfo_ParkingSlot">
+            <End Role="ParkingSlot" EntitySet="ParkingSlot" />
+            <End Role="BoardParkInfo" EntitySet="BoardParkInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParkingSlot_Owner" Association="Self.FK_ParkingSlot_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="ParkingSlot" EntitySet="ParkingSlot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartParkingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BoardParkInfo">
+          <Key>
+            <PropertyRef Name="BoardParkInfoID" />
+          </Key>
+          <Property Name="BoardParkInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkingSlotID" Type="Int32" />
+          <Property Name="pin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="gpio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="value" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ParkingSlot" Relationship="Self.FK_BoardParkInfo_ParkingSlot" FromRole="BoardParkInfo" ToRole="ParkingSlot" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerContactNum" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ParkingSlots" Relationship="Self.FK_ParkingSlot_Owner" FromRole="Owner" ToRole="ParkingSlot" />
+        </EntityType>
+        <EntityType Name="ParkingSlot">
+          <Key>
+            <PropertyRef Name="ParkingSlotID" />
+          </Key>
+          <Property Name="ParkingSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <Property Name="ParkingSlotAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SlotNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvailableStartDate" Type="DateTime" Precision="0" />
+          <Property Name="AvailableEndDate" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="Boolean" />
+          <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="BoardParkInfoes" Relationship="Self.FK_BoardParkInfo_ParkingSlot" FromRole="ParkingSlot" ToRole="BoardParkInfo" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_ParkingSlot_Owner" FromRole="ParkingSlot" ToRole="Owner" />
+        </EntityType>
+        <Association Name="FK_BoardParkInfo_ParkingSlot">
+          <End Role="ParkingSlot" Type="Self.ParkingSlot" Multiplicity="0..1" />
+          <End Role="BoardParkInfo" Type="Self.BoardParkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlot">
+              <PropertyRef Name="ParkingSlotID" />
+            </Principal>
+            <Dependent Role="BoardParkInfo">
+              <PropertyRef Name="ParkingSlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParkingSlot_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+          <End Role="ParkingSlot" Type="Self.ParkingSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="OwnerID" />
+            </Principal>
+            <Dependent Role="ParkingSlot">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartParkingEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BoardParkInfoes" EntityType="Self.BoardParkInfo" />
+          <EntitySet Name="Owners" EntityType="Self.Owner" />
+          <EntitySet Name="ParkingSlots" EntityType="Self.ParkingSlot" />
+          <AssociationSet Name="FK_BoardParkInfo_ParkingSlot" Association="Self.FK_BoardParkInfo_ParkingSlot">
+            <End Role="ParkingSlot" EntitySet="ParkingSlots" />
+            <End Role="BoardParkInfo" EntitySet="BoardParkInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParkingSlot_Owner" Association="Self.FK_ParkingSlot_Owner">
+            <End Role="Owner" EntitySet="Owners" />
+            <End Role="ParkingSlot" EntitySet="ParkingSlots" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmartParkingModelStoreContainer" CdmEntityContainer="SmartParkingEntities1">
+          <EntitySetMapping Name="BoardParkInfoes">
+            <EntityTypeMapping TypeName="SmartParkingModel.BoardParkInfo">
+              <MappingFragment StoreEntitySet="BoardParkInfo">
+                <ScalarProperty Name="BoardParkInfoID" ColumnName="BoardParkInfoID" />
+                <ScalarProperty Name="ParkingSlotID" ColumnName="ParkingSlotID" />
+                <ScalarProperty Name="pin" ColumnName="pin" />
+                <ScalarProperty Name="gpio" ColumnName="gpio" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="SmartParkingModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="OwnerAddress" ColumnName="OwnerAddress" />
+                <ScalarProperty Name="OwnerContactNum" ColumnName="OwnerContactNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingSlots">
+            <EntityTypeMapping TypeName="SmartParkingModel.ParkingSlot">
+              <MappingFragment StoreEntitySet="ParkingSlot">
+                <ScalarProperty Name="ParkingSlotID" ColumnName="ParkingSlotID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="ParkingSlotAddress" ColumnName="ParkingSlotAddress" />
+                <ScalarProperty Name="SlotNumber" ColumnName="SlotNumber" />
+                <ScalarProperty Name="AvailableStartDate" ColumnName="AvailableStartDate" />
+                <ScalarProperty Name="AvailableEndDate" ColumnName="AvailableEndDate" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
