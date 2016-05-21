@@ -32,18 +32,13 @@ while True:
 
   distance = pulse_duration * 17150        #Multiply pulse duration by 17150 to get distance
   distance = round(distance, 2)            #Round to two decimal points
-#  GPIO.output(STATUS,False)
-#if var < 200:
-#   print "Expression value is less than 200"
-#   if var == 150:
-#      print "Which is 150"
+
   if distance < 50:      #Check whether the distance is within range
      print "Distance:",distance - 0.5,"cm"  #Print distance with 0.5 cm calibration
-     print "value : ",GPIO.input(STATUS)
-#     if GPIO.input(STATUS)==0:
-#     GPIO.output(STATUS,True)
-#     print "Space:",GPIO.input(STATUS)
+     print "Somebody has parked vehicle"
+	 
+     GPIO.output(STATUS,True)
   else:
-    print "Out Of Range"                   #display out of range
-#    if GPIO.input(STATUS)==0:
-#        GPIO.output(STATUS,False)
+    print "Parking Slot is empty"                   #display out of range
+
+    GPIO.output(STATUS,False)
